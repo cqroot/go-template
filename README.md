@@ -8,8 +8,8 @@ Quickly create go applications using [sawmill](https://github.com/cqroot/sawmill
 - [x] Configuration with [viper](https://github.com/spf13/viper).
 - [x] Logging with [zap](https://github.com/uber-go/zap).
 - [x] Compile-time Dependency Injection with [wire](https://github.com/google/wire).
+- [x] Lint and test your code with [GitHub Actions](https://github.com/features/actions).
 - [ ] HTTP web framework with [gin](https://github.com/gin-gonic/gin).
 - [ ] ORM with [gorm](https://github.com/go-gorm/gorm).
 - [ ] RPC with [grpc](https://github.com/grpc/grpc).
 - [ ] Test with [testify](https://github.com/stretchr/testify).
-- [ ] Automatically test your code with [GitHub Actions](https://github.com/features/actions).

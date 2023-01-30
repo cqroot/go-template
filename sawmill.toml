@@ -18,8 +18,14 @@ message = "Add logger?"
 type = "toggle"
 meta = ["Yes", "No"]
 
+[variables.add_github_actions]
+message = "Add github actions for go linting and testing?"
+type = "toggle"
+meta = ["Yes", "No"]
+
 [include_path_rules]
 "internal/logger" = { key = "add_logger", value = "Yes" }
+".github" = { key = "add_github_actions", value = "Yes" }
 
 [scripts]
 after = ["init.sh"]
