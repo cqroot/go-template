@@ -6,14 +6,14 @@ import "fmt"
 
 func (a application) Run() error {
 {{- if eq .add_logger "Yes" }}
-    a.logger.Info("app is running...")
+	a.logger.Info("app is running...")
 {{- else }}
 	fmt.Println("app is running...")
 {{- end }}
 
-    // Do Stuff Here
+	// Do Stuff Here
 
-    return nil
+	return nil
 }
 
 func Run() error {
@@ -22,5 +22,5 @@ func Run() error {
 		return err
 	}
 
-    return application.Run()
+	return application.Run()
 }

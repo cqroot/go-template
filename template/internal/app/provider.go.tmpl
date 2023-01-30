@@ -14,16 +14,15 @@ type application struct {
 {{- end }}
 }
 
-{{- if eq .add_logger "Yes" }}
+{{ if eq .add_logger "Yes" -}}
 func New(config *config.Config, logger *logger.Logger) *application {
 {{- else }}
 func New(config *config.Config) *application {
 {{- end }}
 	return &application{
-		config:     config,
+		config: config,
 {{- if eq .add_logger "Yes" }}
-		logger:     logger,
+		logger: logger,
 {{- end }}
 	}
 }
-

@@ -14,7 +14,7 @@ import (
 
 func initApp() (*application, error) {
 	wire.Build(
-        New,
+		New,
 		config.New,
 {{- if eq .add_logger "Yes" }}
 		logger.New,
