@@ -1,0 +1,23 @@
+package cmd
+
+import (
+	"github.com/spf13/cobra"
+
+	"{{ .module_name }}/internal/app"
+)
+
+var rootCmd = &cobra.Command{
+	Use:   "{{ .project_name }}",
+	Short: "{{ .project_name }}",
+	Long:  "{{ .project_name }}",
+	Run:   runRootCmd,
+}
+
+func runRootCmd(cmd *cobra.Command, args []string) {
+    cobra.CheckErr(app.Run())
+}
+
+func Execute() {
+	err := rootCmd.Execute()
+	cobra.CheckErr(err)
+}

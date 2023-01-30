@@ -1,0 +1,26 @@
+package app
+
+{{- if eq .add_logger "No" }}
+import "fmt"
+{{- end }}
+
+func (a application) Run() error {
+{{- if eq .add_logger "Yes" }}
+    a.logger.Info("app is running...")
+{{- else }}
+	fmt.Println("app is running...")
+{{- end }}
+
+    // Do Stuff Here
+
+    return nil
+}
+
+func Run() error {
+	application, err := initApp()
+	if err != nil {
+		return err
+	}
+
+    return application.Run()
+}

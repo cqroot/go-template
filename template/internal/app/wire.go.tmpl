@@ -1,0 +1,24 @@
+//go:build wireinject
+// +build wireinject
+
+package app
+
+import (
+	"github.com/google/wire"
+
+	"{{ .module_name }}/internal/config"
+{{- if eq .add_logger "Yes" }}
+	"{{ .module_name }}/internal/logger"
+{{- end }}
+)
+
+func initApp() (*application, error) {
+	wire.Build(
+        New,
+		config.New,
+{{- if eq .add_logger "Yes" }}
+		logger.New,
+{{- end }}
+	)
+	return &application{}, nil
+}

@@ -1,0 +1,52 @@
+package config
+
+import (
+	"github.com/spf13/viper"
+)
+
+type configItem struct {
+	Key   string
+	Value any
+}
+
+type Config struct {
+	configs       []configItem
+	viperInstance *viper.Viper
+}
+
+func New() (*Config, error) {
+	config := Config{
+		configs: []configItem{
+			{
+				Key:   "log_level",
+				Value: "Info",
+			},
+			{
+				Key:   "log_with_caller",
+				Value: false,
+			},
+		},
+		viperInstance: viper.New(),
+	}
+
+	config.viperInstance.SetTypeByDefaultValue(true)
+	config.viperInstance.SetEnvPrefix("{{ .project_name | ToUpper }}")
+
+	for _, conf := range config.configs {
+		config.viperInstance.SetDefault(conf.Key, conf.Value)
+		err := config.viperInstance.BindEnv(conf.Key)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return &config, nil
+}
+
+func (c *Config) LogLevel() string {
+	return c.viperInstance.GetString("log_level")
+}
+
+func (c *Config) LogWithCaller() bool {
+	return c.viperInstance.GetBool("log_with_caller")
+}

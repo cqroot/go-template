@@ -1,0 +1,29 @@
+package app
+
+import (
+	"{{ .module_name }}/internal/config"
+{{- if eq .add_logger "Yes" }}
+	"{{ .module_name }}/internal/logger"
+{{- end }}
+)
+
+type application struct {
+	config *config.Config
+{{- if eq .add_logger "Yes" }}
+	logger *logger.Logger
+{{- end }}
+}
+
+{{- if eq .add_logger "Yes" }}
+func New(config *config.Config, logger *logger.Logger) *application {
+{{- else }}
+func New(config *config.Config) *application {
+{{- end }}
+	return &application{
+		config:     config,
+{{- if eq .add_logger "Yes" }}
+		logger:     logger,
+{{- end }}
+	}
+}
+
