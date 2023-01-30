@@ -2,21 +2,24 @@
 output = "./dist"
 variables = ["module_name", "project_name", "add_logger"]
 
-[variable]
-[variable.module_name]
+[variables]
+[variables.module_name]
 message = "Your module name:"
 type = "input"
 meta = ["github.com/cqroot/go-template"]
 
-[variable.project_name]
+[variables.project_name]
 message = "Your project name:"
 type = "input"
 meta = ["go-template"]
 
-[variable.add_logger]
+[variables.add_logger]
 message = "Add logger?"
 type = "toggle"
 meta = ["Yes", "No"]
 
 [include_path_rules]
 "internal/logger" = { key = "add_logger", value = "Yes" }
+
+[scripts]
+after = ["init.sh"]
