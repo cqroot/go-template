@@ -1,6 +1,6 @@
 # Go Template
 
-Quickly create go applications using [sawmill](https://github.com/cqroot/sawmill). User friendly selection of features to use.
+Quickly create go applications using [ceres](https://github.com/cqroot/ceres). User friendly selection of features to use.
 
 ## Features
 
