@@ -1,17 +1,11 @@
 [common]
-output = "./dist"
-variables = ["module_name", "project_name", "add_logger"]
+variables = ["module_name", "add_logger"]
 
 [variables]
 [variables.module_name]
 message = "Your module name:"
 type = "input"
 meta = ["github.com/cqroot/go-template"]
-
-[variables.project_name]
-message = "Your project name:"
-type = "input"
-meta = ["go-template"]
 
 [variables.add_logger]
 message = "Add logger?"
