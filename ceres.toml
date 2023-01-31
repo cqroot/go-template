@@ -22,4 +22,4 @@ meta = ["Yes", "No"]
 ".github" = { key = "add_github_actions", value = "Yes" }
 
 [scripts]
-after = ["init.sh"]
+after = ["scripts/init.sh"]
