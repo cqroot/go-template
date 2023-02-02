@@ -1,0 +1,25 @@
+PROJ_NAME={{ .project_name }}
+BUILD_DIR=$(CURDIR)/.build
+
+.PHONY: build-go
+build:
+	@cd $(CURDIR)/internal/app && wire
+	@go build -o "$(BUILD_DIR)/$(PROJ_NAME)" $(CURDIR)/main.go
+
+.PHONY: run
+run: build
+	{{ .project_name | ToUpper }}_LOG_LEVEL=Debug $(BUILD_DIR)/$(PROJ_NAME)
+
+.PHONY: clean
+clean:
+	rm -rf $(BUILD_DIR)
+
+.PHONY: test
+test:
+	go test -v ./...
+
+.PHONY: check
+check:
+	golangci-lint run
+	@echo
+	gofumpt -l .

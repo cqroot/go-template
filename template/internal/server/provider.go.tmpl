@@ -1,0 +1,40 @@
+package server
+
+import (
+	"fmt"
+
+	"go.uber.org/zap"
+
+	"{{ .module_name }}/internal/config"
+	"{{ .module_name }}/internal/logger"
+	"{{ .module_name }}/internal/middleware"
+)
+
+type Server struct {
+	config     *config.Config
+	logger     *logger.Logger
+	middleware *middleware.Middleware
+}
+
+func New(config *config.Config, logger *logger.Logger, middleware *middleware.Middleware) *Server {
+	return &Server{
+		config:     config,
+		logger:     logger,
+		middleware: middleware,
+	}
+}
+
+func (s Server) Run() error {
+	r, err := s.NewRouter()
+	if err != nil {
+		return err
+	}
+
+	s.logger.Debug("Listen and Server",
+		zap.String("IP", s.config.BindIp()),
+		zap.Int("Port", s.config.BindPort()))
+	err = r.Run(
+		fmt.Sprintf("%s:%d", s.config.BindIp(), s.config.BindPort()),
+	)
+	return err
+}

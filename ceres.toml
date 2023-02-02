@@ -1,5 +1,5 @@
 [common]
-variables = ["module_name", "add_logger"]
+variables = ["module_name", "add_gin"]
 
 [variables]
 [variables.module_name]
@@ -7,19 +7,14 @@ message = "Your module name:"
 type = "input"
 meta = ["github.com/cqroot/go-template"]
 
-[variables.add_logger]
-message = "Add logger?"
-type = "toggle"
-meta = ["Yes", "No"]
-
-[variables.add_github_actions]
-message = "Add github actions for go linting and testing?"
+[variables.add_gin]
+message = "Add gin?"
 type = "toggle"
 meta = ["Yes", "No"]
 
 [include_path_rules]
-"internal/logger" = { key = "add_logger", value = "Yes" }
-".github" = { key = "add_github_actions", value = "Yes" }
+"internal/server" = { key = "add_gin", value = "Yes" }
+"internal/middleware" = { key = "add_gin", value = "Yes" }
 
 [scripts]
 after = ["scripts/init.sh"]

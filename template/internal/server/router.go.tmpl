@@ -1,0 +1,45 @@
+package server
+
+import (
+	"fmt"
+
+	"github.com/gin-gonic/gin"
+
+	"github.com/cqroot/go-template/internal/middleware"
+)
+
+func (s Server) NewRouter() (*gin.Engine, error) {
+	if s.config.LogLevel() != "Debug" {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
+	router := gin.New()
+
+	router.Use(s.middleware.LoggerMiddleware(func(f middleware.LogFields) {
+		s.logger.Info(
+			fmt.Sprintf("| %d | %15s | %15s | %-7s %s",
+				f.StatusCode,
+				f.Latency,
+				f.ClientIp,
+				f.Method,
+				f.Path,
+			),
+		)
+	}))
+	router.Use(s.middleware.CorsMiddleware())
+	router.Use(gin.Recovery())
+
+	v1Group := router.Group("v1")
+	{
+		testGroup := v1Group.Group("test")
+		{
+			testGroup.GET("/ping", func(c *gin.Context) {
+				c.JSON(200, gin.H{
+					"message": "pong",
+				})
+			})
+		}
+	}
+
+	return router, nil
+}

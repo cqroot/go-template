@@ -2,27 +2,30 @@ package app
 
 import (
 	"{{ .module_name }}/internal/config"
-{{- if eq .add_logger "Yes" }}
 	"{{ .module_name }}/internal/logger"
+{{- if eq .add_gin "Yes" }}
+	"{{ .module_name }}/internal/server"
 {{- end }}
 )
 
 type application struct {
 	config *config.Config
-{{- if eq .add_logger "Yes" }}
 	logger *logger.Logger
+{{- if eq .add_gin "Yes" }}
+	server *server.Server
 {{- end }}
 }
 
-{{ if eq .add_logger "Yes" -}}
-func New(config *config.Config, logger *logger.Logger) *application {
-{{- else }}
-func New(config *config.Config) *application {
-{{- end }}
+func New(config *config.Config, logger *logger.Logger
+{{- if eq .add_gin "Yes" -}}
+, server *server.Server
+{{- end -}}
+) *application {
 	return &application{
 		config: config,
-{{- if eq .add_logger "Yes" }}
 		logger: logger,
+{{- if eq .add_gin "Yes" }}
+		server: server,
 {{- end }}
 	}
 }

@@ -25,6 +25,14 @@ func New() (*Config, error) {
 				Key:   "log_with_caller",
 				Value: false,
 			},
+			{
+				Key:   "bind_ip",
+				Value: "127.0.0.1",
+			},
+			{
+				Key:   "bind_port",
+				Value: 8080,
+			},
 		},
 		viperInstance: viper.New(),
 	}
@@ -50,3 +58,12 @@ func (c *Config) LogLevel() string {
 func (c *Config) LogWithCaller() bool {
 	return c.viperInstance.GetBool("log_with_caller")
 }
+{{ if eq .add_gin "Yes" }}
+func (c *Config) BindIp() string {
+	return c.viperInstance.GetString("bind_ip")
+}
+
+func (c *Config) BindPort() int {
+	return c.viperInstance.GetInt("bind_port")
+}
+{{- end }}

@@ -1,0 +1,18 @@
+package middleware
+
+import (
+	"{{ .module_name }}/internal/config"
+	"{{ .module_name }}/internal/logger"
+)
+
+type Middleware struct {
+	config *config.Config
+	logger *logger.Logger
+}
+
+func New(config *config.Config, logger *logger.Logger) *Middleware {
+	return &Middleware{
+		config: config,
+		logger: logger,
+	}
+}

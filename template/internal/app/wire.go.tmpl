@@ -7,8 +7,10 @@ import (
 	"github.com/google/wire"
 
 	"{{ .module_name }}/internal/config"
-{{- if eq .add_logger "Yes" }}
 	"{{ .module_name }}/internal/logger"
+{{- if eq .add_gin "Yes" }}
+	"github.com/cqroot/go-template/internal/middleware"
+	"github.com/cqroot/go-template/internal/server"
 {{- end }}
 )
 
@@ -16,8 +18,10 @@ func initApp() (*application, error) {
 	wire.Build(
 		New,
 		config.New,
-{{- if eq .add_logger "Yes" }}
 		logger.New,
+{{- if eq .add_gin "Yes" }}
+		server.New,
+		middleware.New,
 {{- end }}
 	)
 	return &application{}, nil

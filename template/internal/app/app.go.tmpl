@@ -1,19 +1,15 @@
 package app
 
-{{- if eq .add_logger "No" }}
-import "fmt"
-{{- end }}
-
 func (a application) Run() error {
-{{- if eq .add_logger "Yes" }}
 	a.logger.Info("app is running...")
-{{- else }}
-	fmt.Println("app is running...")
-{{- end }}
 
 	// Do Stuff Here
 
+{{- if eq .add_gin "Yes" }}
+	return a.server.Run()
+{{- else }}
 	return nil
+{{- end }}
 }
 
 func Run() error {
