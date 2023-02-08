@@ -13,8 +13,8 @@ type = "toggle"
 meta = ["Yes", "No"]
 
 [include_path_rules]
-"internal/server" = { key = "add_gin", value = "Yes" }
-"internal/middleware" = { key = "add_gin", value = "Yes" }
+"internal/server" = ["add_gin==Yes"]
+"internal/middleware" = ["add_gin==Yes"]
 
 [scripts]
 after = ["scripts/init.sh"]
